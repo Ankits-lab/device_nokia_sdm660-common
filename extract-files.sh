@@ -1,6 +1,7 @@
 #!/bin/bash
 #
 # Copyright (C) 2019-2020 The LineageOS Project
+# Copyright (C) 2019-2020 The AncientOS Project
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -33,18 +34,18 @@ fi
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 
-LINEAGE_ROOT="$MY_DIR"/../../..
+ANCIENT_ROOT="$MY_DIR"/../../..
 
-HELPER="$LINEAGE_ROOT"/vendor/lineage/build/tools/extract_utils.sh
+HELPER="$ANCIENT_ROOT"/vendor/ancient/build/tools/extract_utils.sh
 if [ ! -f "$HELPER" ]; then
     echo "Unable to find helper script at $HELPER"
     exit 1
 fi
 . "$HELPER"
 
-# Use prebuilts from tools-lineage
-TOOLS_LINEAGE="$LINEAGE_ROOT"/prebuilts/tools-lineage/"$PLATFORM"/bin
-PATCHELF="$TOOLS_LINEAGE"/patchelf
+# Use prebuilts from tools-ancient
+TOOLS_ANCINET="$ANCIENT_ROOT"/prebuilts/tools-ancient/"$PLATFORM"/bin
+PATCHELF="$TOOLS_ANCIENT"/patchelf
 
 # Default to sanitizing the vendor folder before extraction
 CLEAN_VENDOR=true
@@ -85,12 +86,12 @@ function blob_fixup() {
 }
 
 # Initialize the helper for common device
-setup_vendor "$DEVICE_COMMON" "$VENDOR" "$LINEAGE_ROOT" true $CLEAN_VENDOR
+setup_vendor "$DEVICE_COMMON" "$VENDOR" "$ANCIENT_ROOT" true $CLEAN_VENDOR
 
 extract "$MY_DIR"/proprietary-files.txt "$SRC" "$SECTION"
 
 # Initialize the helper for device
-setup_vendor "$DEVICE" "$VENDOR" "$LINEAGE_ROOT" false $CLEAN_VENDOR
+setup_vendor "$DEVICE" "$VENDOR" "$ANCIENT_ROOT" false $CLEAN_VENDOR
 
 extract "$MY_DIR"/../$DEVICE/proprietary-files.txt "$SRC" "$SECTION"
 
