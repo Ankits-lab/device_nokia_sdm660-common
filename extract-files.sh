@@ -23,18 +23,12 @@ VENDOR=nokia
 
 INITIAL_COPYRIGHT_YEAR=2019
 
-# Check host-OS before doing anything
-if [[ "$OSTYPE" == "linux-gnu"* ]]; then
-    PLATFORM='linux-x86'
-elif [[ "$OSTYPE" == "darwin"* ]]; then
-    PLATFORM='darwin-x86'
-fi
-
 # Load extractutils and do some sanity checks
 MY_DIR="${BASH_SOURCE%/*}"
 if [[ ! -d "$MY_DIR" ]]; then MY_DIR="$PWD"; fi
 
 ANCIENT_ROOT="$MY_DIR"/../../..
+
 
 HELPER="$ANCIENT_ROOT"/vendor/ancient/build/tools/extract_utils.sh
 if [ ! -f "$HELPER" ]; then
